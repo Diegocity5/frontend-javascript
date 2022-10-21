@@ -4,6 +4,7 @@ const menu_burger = document.querySelector('.menu-burger');
 const menu_mobile = document.querySelector('.mobile-menu');
 const navbar_shooping = document.querySelector('.navbar-shopping-cart');
 const aside = document.querySelector('.product-detail');
+const cards_container = document.querySelector('.cards-container');
 
 
 navbar_email.addEventListener('click', function(event){
@@ -24,3 +25,68 @@ navbar_shooping.addEventListener('click', function(event){
     menu_mobile.classList.add('inactive');
     desktop_menu.classList.add('inactive');
 });
+
+const product_list = [];
+product_list.push({
+    name: 'Bike',
+    prize: 120,
+    image: 'https://images.pexels.com/photos/276517/pexels-photo-276517.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940'
+});
+product_list.push({
+    name: 'Kit de teclado y mouse Logitech MK120 Español Latinoamérica de color negro',
+    prize: 70.991,
+    image: 'https://http2.mlstatic.com/D_NQ_NP_643055-MLA48377746812_112021-V.webp'
+});
+product_list.push({
+    name: 'Laptop HP 14',
+    prize: 1.029,
+    image: 'https://http2.mlstatic.com/D_NQ_NP_612278-MLA48623757086_122021-V.webp'
+});
+product_list.push({
+    name: 'Disco solido SSD interno Westen Digital WD Green',
+    prize: 384.400,
+    image: 'https://http2.mlstatic.com/D_NQ_NP_646272-MLA40283983443_122019-V.webp'
+});
+product_list.push({
+    name: 'Nintendo Switch OLED',
+    prize: 1.834,
+    image:'https://http2.mlstatic.com/D_Q_NP_909032-MLA47920360780_102021-P.webp'
+});
+product_list.push({
+    name: 'Kit 4 Botellas Gt35 Negra Y Gt52 Original',
+    prize: 167.800,
+    image:'https://http2.mlstatic.com/D_NQ_NP_813950-MCO41958233716_052020-W.webp'
+});
+
+function renderProduct(array){
+    for(product of array){
+        const product_card = document.createElement('div');
+        product_card.classList.add('product-card');
+    
+        const img = document.createElement('img');
+        img.setAttribute('src', product.image);
+    
+        const product_info = document.createElement('div');
+        product_info.classList.add('product-info');
+    
+        product_card.append(img, product_info);//agrega varios hijos
+    
+        const product_info_div = document.createElement('div');
+        const product_prize = document.createElement('p');
+        product_prize.innerText = '$ ' + product.prize;
+        const product_name = document.createElement('p');
+        product_name.innerText = product.name;
+    
+        product_info_div.append(product_prize, product_name);
+    
+        const product_info_figure = document.createElement('figure')
+        const product_image_cart = document.createElement('img');
+        product_image_cart.setAttribute('src', './icons/bt_add_to_cart.svg');
+    
+        product_info.append(product_info_div, product_info_figure);
+        product_info_figure.appendChild(product_image_cart);//agrega un solo hijo
+        cards_container.appendChild(product_card);
+    }
+}
+
+renderProduct(product_list);
