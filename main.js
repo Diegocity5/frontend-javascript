@@ -1,76 +1,89 @@
-const navbar_email = document.querySelector('.navbar-email');
-const desktop_menu = document.querySelector('.desktop-menu');
-const menu_burger = document.querySelector('.menu-burger');
-const menu_mobile = document.querySelector('.mobile-menu');
-const navbar_shooping = document.querySelector('.navbar-shopping-cart');
+const navbarEmail = document.querySelector('.navbar-email');
+const desktopMenu = document.querySelector('.desktop-menu');
+const menuBurger = document.querySelector('.menu-burger');
+const menuMobile = document.querySelector('.mobile-menu');
+const navbarShooping = document.querySelector('.navbar-shopping-cart');
 const shoppingCartContainer = document.querySelector('#shoppingCartContainer');
-const cards_container = document.querySelector('.cards-container');
+const cardsContainer = document.querySelector('.cards-container');
 const productDetailContainer = document.querySelector('#productDetail');
 const productDetailCloseIcon = document.querySelector('.product-detail-close');
 
-navbar_email.addEventListener('click', function(event){
-    event.preventDefault();
-    desktop_menu.classList.toggle('inactive');
+navbarEmail.addEventListener('click', toggleDesktopMenu);
+menuBurger.addEventListener('click', toggleMobileMenu);
+navbarShooping.addEventListener('click', toggleShopMenu);
+productDetailCloseIcon.addEventListener('click', closeProductDetailAside);
+
+function toggleDesktopMenu(){
+    desktopMenu.classList.toggle('inactive');
     shoppingCartContainer.classList.add('inactive');
     productDetailContainer.classList.add('inactive');
-});
-
-menu_burger.addEventListener('click', function(event){
-    event.preventDefault();
-    menu_mobile.classList.toggle('inactive');
+};
+function toggleMobileMenu (){
+    menuMobile.classList.toggle('inactive');
     shoppingCartContainer.classList.add('inactive');
     productDetailContainer.classList.add('inactive');
-});
-
-navbar_shooping.addEventListener('click', function(event){
-    event.preventDefault();
+};
+function toggleShopMenu (){
     shoppingCartContainer.classList.toggle('inactive');
-    menu_mobile.classList.add('inactive');
-    desktop_menu.classList.add('inactive');
+    menuMobile.classList.add('inactive');
+    desktopMenu.classList.add('inactive');
     productDetailContainer.classList.add('inactive');
-});
-
-function openProductDetailAside(){
+};
+function openProductDetailAside (){
     productDetailContainer.classList.remove('inactive');
-    menu_mobile.classList.add('inactive');
-    desktop_menu.classList.add('inactive');
+    menuMobile.classList.add('inactive');
+    desktopMenu.classList.add('inactive');
     shoppingCartContainer.classList.add('inactive');
-}
-
-productDetailCloseIcon.addEventListener('click', function(){
+};
+function closeProductDetailAside (){
     productDetailContainer.classList.add('inactive');
-});
+};
 
 const product_list = [];
 product_list.push({
     name: 'Bike',
-    prize: 120,
+    price: 120,
     image: 'https://images.pexels.com/photos/276517/pexels-photo-276517.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940'
 });
 product_list.push({
     name: 'Kit de teclado y mouse Logitech MK120',
-    prize: 70.991,
+    price: 70.991,
     image: 'https://http2.mlstatic.com/D_NQ_NP_643055-MLA48377746812_112021-V.webp'
 });
 product_list.push({
     name: 'Laptop HP 14',
-    prize: 1.029,
+    price: 1.029,
     image: 'https://http2.mlstatic.com/D_NQ_NP_612278-MLA48623757086_122021-V.webp'
 });
 product_list.push({
     name: 'Disco solido SSD',
-    prize: 384.400,
+    price: 384.400,
     image: 'https://http2.mlstatic.com/D_NQ_NP_646272-MLA40283983443_122019-V.webp'
 });
 product_list.push({
     name: 'Nintendo Switch OLED',
-    prize: 1.834,
+    price: 1.834,
     image:'https://http2.mlstatic.com/D_Q_NP_909032-MLA47920360780_102021-P.webp'
 });
 product_list.push({
     name: 'Kit 4 Botellas Gt35',
-    prize: 167.800,
+    price: 167.800,
     image:'https://http2.mlstatic.com/D_NQ_NP_813950-MCO41958233716_052020-W.webp'
+});
+product_list.push({
+    name: 'Show 8 Amazon',
+    price: 495.900,
+    image: 'https://http2.mlstatic.com/D_NQ_NP_670896-MCO48687403364_122021-W.webp'
+});
+product_list.push({
+    name: 'Microfono para PC Gamer',
+    price: 27.900,
+    image: 'https://http2.mlstatic.com/D_NQ_NP_862966-MCO51019559804_082022-W.webp'
+});
+product_list.push({
+    name: 'Sensor Wifi Puerta Ventana',
+    price:  48.403,
+    image: 'https://http2.mlstatic.com/D_NQ_NP_604437-MCO50527801428_062022-O.webp'
 });
 
 function renderProduct(array){
@@ -89,12 +102,12 @@ function renderProduct(array){
         product_card.append(img, product_info);
     
         const product_info_div = document.createElement('div');
-        const product_prize = document.createElement('p');
-        product_prize.innerText = '$ ' + product.prize;
+        const product_price = document.createElement('p');
+        product_price.innerText = '$ ' + product.price;
         const product_name = document.createElement('p');
         product_name.innerText = product.name;
     
-        product_info_div.append(product_prize, product_name);
+        product_info_div.append(product_price, product_name);
     
         const product_info_figure = document.createElement('figure')
         const product_image_cart = document.createElement('img');
@@ -102,7 +115,7 @@ function renderProduct(array){
     
         product_info.append(product_info_div, product_info_figure);
         product_info_figure.appendChild(product_image_cart);
-        cards_container.appendChild(product_card);
+        cardsContainer.appendChild(product_card);
     }
 }
 
